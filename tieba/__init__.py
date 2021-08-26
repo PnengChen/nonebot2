@@ -1,6 +1,6 @@
 from nonebot import on_command
 from nonebot.typing import T_State
-from nonebot.adapters.cqhttp import Message, Bot, Event, MessageSegment, GroupMessageEvent, MessageEvent
+from nonebot.adapters.cqhttp import Message, Bot, Event, MessageSegment, MessageEvent, MessageEvent
 from nonebot.rule import Rule
 from nonebot.plugin import export
 from aiocqhttp.exceptions import Error as CQHttpError
@@ -11,7 +11,6 @@ import re
 from lxml import etree # 导入xpath
 from urllib import request
 from .tieba_gl import get_tieba_data
-from src.service.group_manage import group_range
 import sys
 import io
 import requests
@@ -20,21 +19,9 @@ export = export()
 export.name = '贴吧攻略查找'
 export.usage = '/攻略'
 
-group_l = group_range()
-group_limits = group_l[export.name]
-
 
 async def _checker(bot: Bot, event: Event, state: T_State) -> bool:
-    if isinstance(event, GroupMessageEvent):
-        group = str(event.group_id)
-        # 群聊黑名单
-        if group in group_limits:
-            x = False
-        else:
-            x = True
-    else:
-        x = True
-    return x
+    return isinstance(event, MessageEvent)
 
 
 introduction = on_command("攻略", priority=47, rule=Rule(_checker))
