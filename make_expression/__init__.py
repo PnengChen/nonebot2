@@ -4,15 +4,14 @@ from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event
 import nonebot
 from aiocqhttp.exceptions import Error as CQHttpError
-from nonebot.plugin import export
 from nonebot.adapters.cqhttp import Bot, MessageEvent, Message, Event, GroupMessageEvent
 from nonebot.rule import Rule
 from nonebot.adapters.cqhttp.message import Message, MessageSegment
 from .get_imge import get_express_img
 
 
-
-# list填入你图片的名称，例如摩尔1.jpg的话，list=['摩尔1']
+# 注意修改图片路径以及建立文件夹
+# list填入你图片的名称，例如：摩尔1.jpg的话，list=['摩尔1']
 list = []
 
 
